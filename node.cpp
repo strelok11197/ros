@@ -1,23 +1,23 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Int32.h"
 #include <iostream>
 using namespace std;
 
-int main(int args, char** argv)
+int main(int argc, char** argv)
 {
-	ros::init(int argc, argv, "node");
+	ros::init(argc, argv, "node");
 	ros::NodeHandle n;
-	ros::Publisher pub = n.advertise<std_msgs::String>("/topic", 1000);
+	ros::Publisher pub = n.advertise<std_msgs::Int32>("/topic", 1000);
 
 	ros::Rate loop_rate(1);
 	int a;
+	ros::Duration(5).sleep();
 	while (cin >> a)
 	{
-		std_msgs::String msg;
+		std_msgs::Int32 msg;
 
 		msg.data = a;
 
-		ROS_INFO("%s", msg.data.c_str());
 		pub.publish(msg);
 		loop_rate.sleep();
 	}
